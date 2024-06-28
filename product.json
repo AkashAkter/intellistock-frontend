@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "title": "Ballpoint Pen",
+    "price": "2.00",
+    "description": "Smooth writing ballpoint pen with blue ink.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/QX366HS/1.jpg"
+  },
+  {
+    "id": 2,
+    "title": "HB Pencil",
+    "price": "1.20",
+    "description": "High-quality HB pencil for writing and sketching.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/02r8mpG/2.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Rubber Eraser",
+    "price": "0.80",
+    "description": "Soft eraser that removes pencil marks cleanly.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/grWhBcQ/3.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Pencil Sharpener",
+    "price": "3.00",
+    "description": "Dual-hole sharpener for standard and jumbo pencils.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/0JDWktJ/4.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Spiral Notebook",
+    "price": "8.00",
+    "description": "100-page college-ruled spiral notebook.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/kKbrHpb/5.jpg"
+  },
+  {
+    "id": 6,
+    "title": "3-Ring Binder",
+    "price": "14.00",
+    "description": "Durable 1-inch binder with pockets.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/xMNW08F/6.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Highlighter Set",
+    "price": "6.00",
+    "description": "Set of 4 neon highlighters for marking text.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/znXMMyV/7.jpg"
+  },
+  {
+    "id": 8,
+    "title": "12-inch Ruler",
+    "price": "4.00",
+    "description": "Clear plastic ruler with both metric and imperial measurements.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/tpjN1ZG/8.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Glue Stick",
+    "price": "4.00",
+    "description": "Non-toxic glue stick for paper and crafts.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/pR0kTV0/9.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Safety Scissors",
+    "price": "8.00",
+    "description": "Blunt-tip scissors for safe cutting.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/jv1Rt44/10.jpg"
+  },
+  {
+    "id": 11,
+    "title": "School Backpack",
+    "price": "100.00",
+    "description": "Spacious and durable backpack with multiple compartments.",
+    "category": "Backpacks",
+    "image": "https://i.ibb.co/Pmn5900/11.jpg"
+  },
+  {
+    "id": 12,
+    "title": "Insulated Lunchbox",
+    "price": "60.00",
+    "description": "Keeps food fresh with insulated lining.",
+    "category": "Lunchboxes",
+    "image": "https://i.ibb.co/qrSs5Y6/12.jpg"
+  },
+  {
+    "id": 13,
+    "title": "Water Bottle",
+    "price": "40.00",
+    "description": "BPA-free water bottle with flip-top lid.",
+    "category": "Bottles",
+    "image": "https://i.ibb.co/1d0wyYJ/13.jpg"
+  },
+  {
+    "id": 14,
+    "title": "Scientific Calculator",
+    "price": "48.00",
+    "description": "Functions include trigonometry and logarithms.",
+    "category": "Calculators",
+    "image": "https://i.ibb.co/B3G6dTx/14.jpg"
+  },
+  {
+    "id": 15,
+    "title": "Crayon Set",
+    "price": "10.00",
+    "description": "Box of 24 vibrant color crayons.",
+    "category": "Art Supplies",
+    "image": "https://i.ibb.co/pZbYGpv/15.jpg"
+  },
+  {
+    "id": 16,
+    "title": "Marker Set",
+    "price": "16.00",
+    "description": "Set of 12 washable markers.",
+    "category": "Art Supplies",
+    "image": "https://i.ibb.co/B6wk5L3/16.jpg"
+  },
+  {
+    "id": 17,
+    "title": "Colored Pencils",
+    "price": "20.00",
+    "description": "Pack of 24 assorted colored pencils.",
+    "category": "Art Supplies",
+    "image": "https://i.ibb.co/L5RB7tx/17.jpg"
+  },
+  {
+    "id": 18,
+    "title": "Sticky Notes",
+    "price": "6.00",
+    "description": "100-sheet pad of sticky notes for reminders.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/C8GGhQ9/18.jpg"
+  },
+  {
+    "id": 19,
+    "title": "Index Cards",
+    "price": "8.00",
+    "description": "Pack of 100 lined index cards.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/DG0VFcz/19.jpg"
+  },
+  {
+    "id": 20,
+    "title": "Whiteboard",
+    "price": "80.00",
+    "description": "24x36 inch dry erase whiteboard.",
+    "category": "Office Supplies",
+    "image": "https://i.ibb.co/nRXyjCj/20.jpg"
+  },
+  {
+    "id": 21,
+    "title": "Dry Erase Markers",
+    "price": "24.00",
+    "description": "Pack of 4 assorted color dry erase markers.",
+    "category": "Office Supplies",
+    "image": "https://i.ibb.co/gwZtYLb/21.jpg"
+  },
+  {
+    "id": 22,
+    "title": "Pocket Folders",
+    "price": "12.00",
+    "description": "Set of 5 two-pocket folders.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/JtRGYPX/22.jpg"
+  },
+  {
+    "id": 23,
+    "title": "Binder Clips",
+    "price": "6.00",
+    "description": "Pack of 12 medium binder clips.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/7zRB2TD/23.jpg"
+  },
+  {
+    "id": 24,
+    "title": "Paper Clips",
+    "price": "4.00",
+    "description": "Pack of 100 paper clips.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/NNbMRgj/24.jpg"
+  },
+  {
+    "id": 25,
+    "title": "Stapler",
+    "price": "20.00",
+    "description": "Compact stapler with 500 staples.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/3NPHcX9/25.jpg"
+  },
+  {
+    "id": 26,
+    "title": "Loose Leaf Paper",
+    "price": "10.00",
+    "description": "Pack of 200 college-ruled sheets.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/CB2nHWN/26.jpg"
+  },
+  {
+    "id": 27,
+    "title": "Graph Paper",
+    "price": "12.00",
+    "description": "Pack of 100 sheets of graph paper.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/LxjcngL/27.jpg"
+  },
+  {
+    "id": 28,
+    "title": "Protractor",
+    "price": "4.00",
+    "description": "180-degree clear plastic protractor.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/71L9KG0/28.jpg"
+  },
+  {
+    "id": 29,
+    "title": "Compass",
+    "price": "8.00",
+    "description": "Metal compass for drawing circles.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/F6t2Jjw/29.jpg"
+  },
+  {
+    "id": 30,
+    "title": "Liquid Glue",
+    "price": "4.00",
+    "description": "4oz bottle of school glue.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/0qrgys1/30.jpg"
+  }
+]

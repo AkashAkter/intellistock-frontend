@@ -6,6 +6,7 @@ import {
   Pressable,
   TextInput,
   Image,
+  Alert,
 } from "react-native";
 import React from "react";
 import { Feather } from "@expo/vector-icons";
@@ -20,7 +21,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const CartScreen = () => {
   const cart = useSelector((state) => state.cart.cart);
-  console.log(cart);
+  // console.log(cart);
   const total = cart
     ?.map((item) => item.price * item.quantity)
     .reduce((curr, prev) => curr + prev, 0);
@@ -35,38 +36,24 @@ const CartScreen = () => {
     dispatch(removeFromCart(item));
   };
   const navigation = useNavigation();
+
+  const handleProceedToBuy = () => {
+    if (cart.length === 0) {
+      Alert.alert("Your cart is empty");
+    } else {
+      navigation.navigate("Confirm");
+    }
+  };
   return (
     <ScrollView style={{ marginTop: 40, flex: 1, backgroundColor: "white" }}>
       <View
         style={{
-          backgroundColor: "#00CED1",
-          padding: 10,
+          flex: 1,
           flexDirection: "row",
-          alignItems: "center",
+          justifyContent: "center", // Center horizontally
+          alignItems: "center", // Center vertically
         }}
-      >
-        <Pressable
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginHorizontal: 7,
-            gap: 10,
-            backgroundColor: "white",
-            borderRadius: 3,
-            height: 38,
-            flex: 1,
-          }}
-        >
-          <AntDesign
-            style={{ paddingLeft: 10 }}
-            name="search1"
-            size={22}
-            color="black"
-          />
-          <TextInput placeholder="Search Amazon.in" />
-        </Pressable>
-        <Feather name="mic" size={24} color="black" />
-      </View>
+      ></View>
 
       <View style={{ padding: 10, flexDirection: "row", alignItems: "center" }}>
         <Text style={{ fontSize: 18, fontWeight: "400" }}>Subtotal : </Text>
@@ -75,7 +62,7 @@ const CartScreen = () => {
       <Text style={{ marginHorizontal: 10 }}>EMI details Available</Text>
 
       <Pressable
-        onPress={() => navigation.navigate("Confirm")}
+        onPress={handleProceedToBuy}
         style={{
           backgroundColor: "#FFC72C",
           padding: 10,

@@ -22,7 +22,6 @@ import {
 import Banner from "../components/Banner";
 import Footer from "../components/Footer";
 import ProductItem from "../components/ProductItem";
-import DropDownPicker from "react-native-dropdown-picker";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { BottomModal, ModalContent, SlideAnimation } from "react-native-modals";
@@ -31,182 +30,134 @@ import { jwtDecode } from "jwt-decode";
 import { UserType } from "../UserContext";
 
 const HomeScreen = () => {
-  const list = [
+  const trendingProducts = [
     {
-      id: "0",
-      image:
-        "https://tendringprimaryrecyclescheme.weebly.com/uploads/1/2/6/5/126520253/bic-main-image.jpg",
-      name: "Writing",
+      id: 5,
+      title: "Spiral Notebook",
+      price: "8.00",
+      description: "100-page college-ruled spiral notebook.",
+      category: "Stationery",
+      image: "https://i.ibb.co/kKbrHpb/5.jpg",
     },
     {
-      id: "1",
-      image:
-        "https://images-cdn.ubuy.co.in/64575b37cc0f1f34a12015d3-yiozojio-b5-spiral-notebook-4pack.jpg",
-      name: "Notebooks",
+      id: 6,
+      title: "3-Ring Binder",
+      price: "14.00",
+      description: "Durable 1-inch binder with pockets.",
+      category: "Stationery",
+      image: "https://i.ibb.co/xMNW08F/6.jpg",
     },
     {
-      id: "3",
-      image:
-        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEglAzJaxbG5GXSTtjJBrkXCYI3g4j8QDZjh-F6WZBpWnp3J8oCIdcngSW-GayJ5N9pgnuNxG7e85nD_PIqWDNPNDGQ5cbQkL1DwvCbN7dctT5jVEZTVT4dFAuCzx-UgsU5hgsloB7105fRv/s1600/binder+with+folders.jpg",
-      name: "Blinders",
+      id: 7,
+      title: "Highlighter Set",
+      price: "6.00",
+      description: "Set of 4 neon highlighters for marking text.",
+      category: "Stationery",
+      image: "https://i.ibb.co/znXMMyV/7.jpg",
     },
     {
-      id: "4",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQywzjDHzJODssCQD_UzeKmWZfk019l-kqiNw&s",
-      name: "Materials",
-    },
-  ];
-
-  const images = [
-    "https://img.etimg.com/thumb/msid-93051525,width-1070,height-580,imgsize-2243475,overlay-economictimes/photo.jpg",
-    "https://images-eu.ssl-images-amazon.com/images/G/31/img22/Wireless/devjyoti/PD23/Launches/Updated_ingress1242x550_3.gif",
-    "https://images-eu.ssl-images-amazon.com/images/G/31/img23/Books/BB/JULY/1242x550_Header-BB-Jul23.jpg",
-  ];
-
-  const deals = [
-    {
-      id: "20",
-      title: "Scientific Calculator",
-      oldPrice: 1200,
-      price: 999,
-      image:
-        "https://img.avery.com/web/blog/top-5-school-supplies-according-to-moms-02",
-      carouselImages: [
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-      ],
-      color: "Black",
-      size: "Standard",
+      id: 8,
+      title: "12-inch Ruler",
+      price: "4.00",
+      description:
+        "Clear plastic ruler with both metric and imperial measurements.",
+      category: "Stationery",
+      image: "https://i.ibb.co/tpjN1ZG/8.jpg",
     },
     {
-      id: "30",
-      title: "Graphing Calculator",
-      oldPrice: 3500,
-      price: 2999,
-      image:
-        "https://img.avery.com/web/blog/top-5-school-supplies-according-to-moms-02",
-      carouselImages: [
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-      ],
-      color: "Silver",
-      size: "Large",
+      id: 9,
+      title: "Glue Stick",
+      price: "4.00",
+      description: "Non-toxic glue stick for paper and crafts.",
+      category: "Stationery",
+      image: "https://i.ibb.co/pR0kTV0/9.jpg",
     },
     {
-      id: "40",
-      title: "Scientific Notebook (Set of 3)",
-      oldPrice: 500,
-      price: 399,
-      image:
-        "https://img.avery.com/web/blog/top-5-school-supplies-according-to-moms-02",
-      carouselImages: [
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-      ],
-      color: "Assorted Colors",
-      size: "A4",
-    },
-    {
-      id: "50",
-      title: "Mechanical Pencil Set (0.7mm, Pack of 5)",
-      oldPrice: 250,
-      price: 199,
-      image:
-        "https://img.avery.com/web/blog/top-5-school-supplies-according-to-moms-02",
-      carouselImages: [
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-      ],
-      color: "Assorted Colors",
-      size: "Standard",
+      id: 10,
+      title: "Safety Scissors",
+      price: "8.00",
+      description: "Blunt-tip scissors for safe cutting.",
+      category: "Stationery",
+      image: "https://i.ibb.co/jv1Rt44/10.jpg",
     },
   ];
-
   const offers = [
     {
-      id: 0,
-      title: "Scientific Calculator",
-      offer: "20% off",
-      oldPrice: 1200,
-      price: 960,
-      image:
-        "https://img.avery.com/web/blog/top-5-school-supplies-according-to-moms-02",
-      carouselImages: [
-        "https://img.avery.com/web/blog/top-5-school-supplies-according-to-moms-02",
-        "https://img.avery.com/web/blog/top-5-school-supplies-according-to-moms-02",
-        "https://img.avery.com/web/blog/top-5-school-supplies-according-to-moms-02",
-      ],
-      color: "Black",
-      size: "Standard",
+      id: 15,
+      title: "Crayon Set",
+      price: "10.00",
+      description: "Box of 24 vibrant color crayons.",
+      category: "Art Supplies",
+      image: "https://i.ibb.co/pZbYGpv/15.jpg",
+      offer: "Buy 2, get 1 free",
     },
     {
-      id: 1,
-      title: "College Backpack",
-      offer: "30% off",
-      oldPrice: 1500,
-      price: 1050,
-      image:
-        "https://img.avery.com/web/blog/top-5-school-supplies-according-to-moms-02",
-      carouselImages: [
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-      ],
-      color: "Blue",
-      size: "Large",
+      id: 16,
+      title: "Marker Set",
+      price: "16.00",
+      description: "Set of 12 washable markers.",
+      category: "Art Supplies",
+      image: "https://i.ibb.co/B6wk5L3/16.jpg",
+      offer: "15% off on next purchase",
     },
     {
-      id: 2,
-      title: "Textbooks Bundle",
-      offer: "15% off",
-      oldPrice: 3000,
-      price: 2550,
-      image:
-        "https://img.avery.com/web/blog/top-5-school-supplies-according-to-moms-02",
-      carouselImages: [
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-        "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/Citiplus_Scientific_Calculator_for_Stude-Citiplus-88c3f-261316.jpg",
-      ],
-      color: "Multi-color",
-      size: "Various Subjects",
+      id: 17,
+      title: "Colored Pencils",
+      price: "20.00",
+      description: "Pack of 24 assorted colored pencils.",
+      category: "Art Supplies",
+      image: "https://i.ibb.co/L5RB7tx/17.jpg",
+      offer: "Buy 1, get 50% off on second item",
+    },
+    {
+      id: 18,
+      title: "Sticky Notes",
+      price: "6.00",
+      description: "100-sheet pad of sticky notes for reminders.",
+      category: "Stationery",
+      image: "https://i.ibb.co/C8GGhQ9/18.jpg",
+      offer: "Free shipping on orders over $10",
+    },
+    {
+      id: 19,
+      title: "Index Cards",
+      price: "8.00",
+      description: "Pack of 100 lined index cards.",
+      category: "Stationery",
+      image: "https://i.ibb.co/DG0VFcz/19.jpg",
+      offer: "10% off for students",
+    },
+    {
+      id: 20,
+      title: "Whiteboard",
+      price: "80.00",
+      description: "24x36 inch dry erase whiteboard.",
+      category: "Office Supplies",
+      image: "https://i.ibb.co/nRXyjCj/20.jpg",
+      offer: "Buy 1, get a pack of markers free",
     },
   ];
+
   const { userId, setUserId } = useContext(UserType);
   const navigation = useNavigation();
   const [products, setProducts] = useState([]);
-  const [open, setOpen] = useState(false);
   const [addresses, setAddresses] = useState([]);
-  const [category, setCategory] = useState("jewelery");
   const [selectedAddress, setSelectedAddress] = useState("");
-  // console.log(selectedAddress);
-  const [items, setItems] = useState([
-    { label: "Men's clothing", value: "men's clothing" },
-    { label: "jewelery", value: "jewelery" },
-    { label: "electronics", value: "electronics" },
-    { label: "women's clothing", value: "women's clothing" },
-  ]);
 
+  // console.log(cart);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://fakestoreapi.com/products");
+        const response = await fetch("http://192.168.0.113:8000/products");
         const json = await response.json();
-        setProducts(json);
+        // console.log("Fetched products:", json.products); // Debug log
+        setProducts(json.products);
       } catch (error) {
         console.log("Error message:", error);
       }
     };
 
     fetchData();
-  }, []);
-  const onGenderOpen = useCallback(() => {
-    setCompanyOpen(false);
   }, []);
 
   const cart = useSelector((state) => state.cart.cart);
@@ -257,34 +208,20 @@ const HomeScreen = () => {
         <ScrollView>
           <View
             style={{
-              backgroundColor: "#00CED1",
-              padding: 10,
+              flex: 1,
               flexDirection: "row",
-              alignItems: "center",
+              justifyContent: "center", // Center horizontally
+              alignItems: "center", // Center vertically
             }}
           >
-            <Pressable
+            <Image
+              source={require("../assets/intellistockLogo.png")}
               style={{
-                flexDirection: "row",
-                alignItems: "center",
-                marginHorizontal: 7,
-                gap: 10,
-                backgroundColor: "white",
-                borderRadius: 3,
-                height: 38,
-                flex: 1,
+                width: 200,
+                height: 100, // Adjust this value to set the desired height
+                resizeMode: "contain", // Ensure the image is not cropped
               }}
-            >
-              <AntDesign
-                style={{ paddingLeft: 10 }}
-                name="search1"
-                size={22}
-                color="black"
-              />
-              <TextInput placeholder="Search" />
-            </Pressable>
-
-            <Feather name="mic" size={24} color="black" />
+            />
           </View>
 
           <Pressable
@@ -294,7 +231,7 @@ const HomeScreen = () => {
               alignItems: "center",
               gap: 5,
               padding: 10,
-              backgroundColor: "#AFEEEE",
+              backgroundColor: "#dae6e6",
             }}
           >
             <Ionicons name="location-outline" size={24} color="black" />
@@ -314,135 +251,59 @@ const HomeScreen = () => {
 
           <Banner />
 
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {list.map((item, index) => (
-              <Pressable
-                key={index}
-                style={{
-                  margin: 10,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Image
-                  style={{ width: 50, height: 50, resizeMode: "contain" }}
-                  source={{ uri: item.image }}
-                />
+          <View style={{ marginTop: 30 }}>
+            <Text
+              style={{ fontSize: 20, fontWeight: "bold", textAlign: "center" }}
+            >
+              TRENDING PRODUCTS
+            </Text>
 
-                <Text
-                  style={{
-                    textAlign: "center",
-                    fontSize: 12,
-                    fontWeight: "500",
-                    marginTop: 5,
-                  }}
-                >
-                  {item?.name}
-                </Text>
-              </Pressable>
-            ))}
-          </ScrollView>
-
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            {deals.map((item, index) => (
-              <Pressable
-                onPress={() =>
-                  navigation.navigate("Info", {
-                    id: item.id,
-                    title: item.title,
-                    price: item?.price,
-                    carouselImages: item.carouselImages,
-                    color: item?.color,
-                    size: item?.size,
-                    oldPrice: item?.oldPrice,
-                    item: item,
-                  })
-                }
-                key={item.id}
-                style={{
-                  marginVertical: 10,
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                <Image
-                  style={{ width: 180, height: 180, resizeMode: "contain" }}
-                  source={{ uri: item.image }}
-                />
-              </Pressable>
-            ))}
-          </View>
-
-          <Text
-            style={{
-              height: 1,
-              borderColor: "#D0D0D0",
-              borderWidth: 2,
-              marginTop: 15,
-            }}
-          />
-
-          <Text style={{ padding: 10, fontSize: 18, fontWeight: "bold" }}>
-            Today's Deals
-          </Text>
-
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {offers.map((item) => (
-              <Pressable
-                onPress={() =>
-                  navigation.navigate("Info", {
-                    id: item.id,
-                    title: item.title,
-                    price: item?.price,
-                    carouselImages: item.carouselImages,
-                    color: item?.color,
-                    size: item?.size,
-                    oldPrice: item?.oldPrice,
-                    item: item,
-                  })
-                }
-                key={item.id}
-                style={{
-                  marginVertical: 10,
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Image
-                  style={{ width: 150, height: 150, resizeMode: "contain" }}
-                  source={{ uri: item?.image }}
-                />
-                <View
-                  style={{
-                    backgroundColor: "#E31837",
-                    paddingVertical: 5,
-                    width: 130,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginTop: 10,
-                    borderRadius: 4,
-                  }}
-                >
-                  <Text
+            <View
+              style={{
+                marginTop: 15,
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "space-around",
+              }}
+            >
+              {trendingProducts?.map((product, index) => (
+                <Pressable style={{ margin: 10 }} key={index}>
+                  <Image
+                    style={{ width: 150, height: 150, resizeMode: "contain" }}
+                    source={{ uri: product?.image }}
+                  />
+                  <Text numberOfLines={1} style={{ width: 150, marginTop: 10 }}>
+                    {product?.title}
+                  </Text>
+                  <View
                     style={{
-                      textAlign: "center",
-                      color: "white",
-                      fontSize: 13,
-                      fontWeight: "bold",
+                      marginTop: 5,
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
                     }}
                   >
-                    Upto {item?.offer}
-                  </Text>
-                </View>
-              </Pressable>
-            ))}
-          </ScrollView>
+                    <Text style={{ fontSize: 15, fontWeight: "bold" }}>
+                      RM {product?.price}
+                    </Text>
+                  </View>
+                  <Pressable
+                    style={{
+                      backgroundColor: "#FFC72C",
+                      padding: 10,
+                      borderRadius: 20,
+                      justifyContent: "center",
+                      alignItems: "center",
+
+                      marginTop: 10,
+                    }}
+                  >
+                    <Text>Add to Cart</Text>
+                  </Pressable>
+                </Pressable>
+              ))}
+            </View>
+          </View>
 
           <Text
             style={{
@@ -453,34 +314,110 @@ const HomeScreen = () => {
             }}
           />
 
-          <View
-            style={{
-              marginHorizontal: 10,
-              marginTop: 20,
-              width: "45%",
-              marginBottom: open ? 50 : 15,
-            }}
-          >
-            <DropDownPicker
-              style={{
-                borderColor: "#B7B7B7",
-                height: 30,
-                marginBottom: open ? 120 : 15,
-              }}
-              open={open}
-              value={category} //genderValue
-              items={items}
-              setOpen={setOpen}
-              setValue={setCategory}
-              setItems={setItems}
-              placeholder="choose category"
-              placeholderStyle={styles.placeholderStyles}
-              onOpen={onGenderOpen}
-              // onChangeValue={onChange}
-              zIndex={3000}
-              zIndexInverse={1000}
+          <View style={{ marginTop: 15 }}>
+            <Image
+              source={{
+                uri: "https://media.istockphoto.com/id/1414378934/photo/many-colorful-school-supplies-and-backpack-arranged-on-blue-background.jpg?s=612x612&w=0&k=20&c=k1GsN7RU9KSaiXpex6fg9SwgGStt9cFvKky8i7wL5L0=",
+              }} // Replace with your image URL
+              style={{ width: "100%", height: 200 }} // Adjust height as needed
+              resizeMode="cover" // Ensures the image covers the entire container
             />
           </View>
+
+          <Text
+            style={{
+              height: 1,
+              borderColor: "#D0D0D0",
+              borderWidth: 2,
+              marginTop: 15,
+            }}
+          />
+
+          <View style={{ marginTop: 30 }}>
+            <Text
+              style={{ fontSize: 20, fontWeight: "bold", textAlign: "center" }}
+            >
+              BEST DEALS
+            </Text>
+
+            <View
+              style={{
+                marginTop: 15,
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "space-around",
+              }}
+            >
+              {offers?.map((product, index) => (
+                <Pressable key={index} style={{ margin: 10, width: 180 }}>
+                  <Image
+                    style={{ width: 150, height: 150, resizeMode: "contain" }}
+                    source={{ uri: product.image }}
+                  />
+                  <Text
+                    numberOfLines={1}
+                    style={{ marginTop: 10, fontSize: 16 }}
+                  >
+                    {product.title}
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text style={{ fontSize: 15, fontWeight: "bold" }}>
+                      RM {product.price}
+                    </Text>
+                  </View>
+                  <Pressable
+                    style={{
+                      backgroundColor: "#FFC72C",
+                      paddingVertical: 10,
+                      paddingHorizontal: 20,
+                      borderRadius: 20,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginTop: 10,
+                    }}
+                  >
+                    <Text>Add to Cart</Text>
+                  </Pressable>
+                  <Text
+                    style={{
+                      marginTop: 5,
+                      fontSize: 12,
+                      fontWeight: 900,
+                      color: "red",
+                    }}
+                  >
+                    {product.offer}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          </View>
+
+          <Text
+            style={{
+              height: 1,
+              borderColor: "#D0D0D0",
+              borderWidth: 2,
+              marginTop: 15,
+            }}
+          />
+
+          <Text
+            style={{
+              marginTop: 15,
+              fontSize: 20,
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
+            PRODUCTS
+          </Text>
 
           <View
             style={{
@@ -490,13 +427,11 @@ const HomeScreen = () => {
               flexWrap: "wrap",
             }}
           >
-            {products
-              ?.filter((item) => item.category === category)
-              .map((item, index) => (
-                <View key={item.id} style={{ margin: 20 }}>
-                  <ProductItem item={item} />
-                </View>
-              ))}
+            {products?.slice(0, 4).map((item, index) => (
+              <View key={index} style={{ margin: 20 }}>
+                <ProductItem item={item} />
+              </View>
+            ))}
           </View>
 
           {/* <Advertisement /> */}

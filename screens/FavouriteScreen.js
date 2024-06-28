@@ -1,14 +1,106 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  FlatList,
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import { UserType } from "../UserContext";
+import { SafeAreaView } from "react-native-safe-area-context";
+import axios from "axios";
 
 const FavouriteScreen = () => {
+  const [favourites, setFavourites] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const { userId, setUserId } = useContext(UserType);
+
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await axios.get(
+          `http://192.168.0.113:8000/profile/${userId}`
+        );
+        const { user } = response.data;
+        setUser(user);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+  // console.log(user);
+
+  const [products, setProducts] = useState([]);
+
+  // console.log(cart);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://192.168.0.113:8000/favourite");
+        const json = await response.json();
+        // console.log("Fetched products:", json.products); // Debug log
+        setProducts(json.favourite);
+      } catch (error) {
+        console.log("Error message:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // console.log(products);
+
   return (
-    <View>
-      <Text>FavouriteScreen</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1, padding: 10, backgroundColor: "#fff" }}>
+      <ScrollView>
+        <View>
+          <Text
+            style={{ fontSize: 20, fontWeight: "bold", textAlign: "center" }}
+          >
+            MY WISHLISTS
+          </Text>
+        </View>
+        <View
+          style={{
+            marginTop: 15,
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+          }}
+        >
+          {products?.map((product, index) => (
+            <Pressable key={index} style={{ margin: 10 }}>
+              <Image
+                style={{ width: 150, height: 150, resizeMode: "contain" }}
+                source={{ uri: product?.image }}
+              />
+              <Text numberOfLines={1} style={{ width: 150, marginTop: 10 }}>
+                {product?.title}
+              </Text>
+              <View
+                style={{
+                  marginTop: 5,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text style={{ fontSize: 15, fontWeight: "bold" }}>
+                  RM {product?.price}
+                </Text>
+              </View>
+            </Pressable>
+          ))}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 export default FavouriteScreen;
-
-const styles = StyleSheet.create({});

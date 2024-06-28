@@ -1,4 +1,5 @@
 import {
+  Image,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -47,34 +48,20 @@ const AddAddressScreen = () => {
     <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 40 }}>
       <View
         style={{
-          backgroundColor: "#00CED1",
-          padding: 10,
+          flex: 1,
           flexDirection: "row",
-          alignItems: "center",
+          justifyContent: "center", // Center horizontally
+          alignItems: "center", // Center vertically
         }}
       >
-        <Pressable
+        <Image
+          source={require("../assets/intellistockLogo.png")}
           style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginHorizontal: 7,
-            gap: 10,
-            backgroundColor: "white",
-            borderRadius: 3,
-            height: 38,
-            flex: 1,
+            width: 200,
+            height: 100, // Adjust this value to set the desired height
+            resizeMode: "contain", // Ensure the image is not cropped
           }}
-        >
-          <AntDesign
-            style={{ paddingLeft: 10 }}
-            name="search1"
-            size={22}
-            color="black"
-          />
-          <TextInput placeholder="Search Amazon.in" />
-        </Pressable>
-
-        <Feather name="mic" size={24} color="black" />
+        />
       </View>
 
       <View style={{ padding: 10 }}>
@@ -102,7 +89,7 @@ const AddAddressScreen = () => {
           {/* all the added adresses */}
           {addresses?.map((item, index) => (
             <Pressable
-              key={item.id || index}
+              key={index}
               style={{
                 borderWidth: 1,
                 borderColor: "#D0D0D0",

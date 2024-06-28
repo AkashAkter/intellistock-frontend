@@ -24,14 +24,24 @@ const LoginScreen = () => {
     const checkLoginStatus = async () => {
       try {
         const token = await AsyncStorage.getItem("authToken");
+        const role = await AsyncStorage.getItem("authRole");
+        // console.log(token);
+        // console.log(role);
 
-        if (token) {
-          navigation.replace("Main");
+        if (token && role) {
+          if (role === "customer") {
+            navigation.replace("Main");
+          } else if (role === "rider") {
+            navigation.replace("RiderScreen");
+          } else if (role === "admin") {
+            navigation.replace("AdminScreen"); // Replace with AdminScreen for admin role
+          }
         }
       } catch (err) {
-        console.log("error message", err);
+        console.log("Error message:", err);
       }
     };
+
     checkLoginStatus();
   }, []);
 
@@ -40,7 +50,7 @@ const LoginScreen = () => {
       email: email,
       password: password,
     };
-
+    // console.log(user);
     fetch("http://192.168.0.113:8000/login", {
       method: "POST",
       headers: {
@@ -48,16 +58,39 @@ const LoginScreen = () => {
       },
       body: JSON.stringify(user),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Invalid Email or Password");
+        }
+        return response.json();
+      })
+
       .then((data) => {
-        console.log(data);
+        const role = data.role;
         const token = data.token;
-        AsyncStorage.setItem("authToken", token);
-        navigation.replace("Main");
+
+        // Store token and role in AsyncStorage
+        AsyncStorage.setItem("authToken", token)
+          .then(() => AsyncStorage.setItem("authRole", role))
+          .then(() => {
+            // Navigate based on user role
+            if (role === "customer") {
+              navigation.replace("Main");
+            } else if (role === "rider") {
+              navigation.replace("RiderScreen");
+            } else if (role === "admin") {
+              navigation.replace("AdminScreen"); // Replace with AdminScreen for admin role
+            }
+          })
+          .catch((error) => {
+            throw new Error(
+              "Error storing data in AsyncStorage: " + error.message
+            );
+          });
       })
       .catch((error) => {
-        Alert.alert("Login Error", "Invalid Email");
-        console.log(error);
+        Alert.alert("Login Error", error.message);
+        console.error("Login Error:", error);
       });
   };
 

@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   AntDesign,
   Entypo,
+  Feather,
   FontAwesome,
   Ionicons,
   MaterialIcons,
@@ -15,11 +16,25 @@ import {
 import ProfileScreen from "../screens/ProfileScreen";
 import CartScreen from "../screens/CartScreen";
 import FavouriteScreen from "../screens/FavouriteScreen";
-import TrendingScreen from "../screens/TrendingScreen";
 import ProductInfoScreen from "../screens/ProductInfoScreen";
 import AddAddressScreen from "../screens/AddAddressScreen";
 import AddressScreen from "../screens/AddressScreen";
 import ConfirmationScreen from "../screens/ConfirmationScreen";
+import OrderScreen from "../screens/OrderScreen";
+import Dashboard from "../riderScreen/Dashboard";
+import RiderProfileScreen from "../riderScreen/RiderProfileScreen";
+import AdminHome from "../admin/AdminHome";
+import CollectionScreen from "../screens/CollectionScreen";
+import OrderInfoScreen from "../riderScreen/OrderInfoScreen";
+import UserList from "../admin/UserList";
+import ProductList from "../admin/ProductList";
+import OrderList from "../admin/OrderList";
+import AddProduct from "../admin/AddProduct";
+import ProductListInfo from "../admin/ProductListInfo";
+import ProfileDetails from "../components/ProfileDetails";
+import RecievedOrderInfo from "../riderScreen/RecievedOrderInfo";
+import UserListInfo from "../admin/UserListInfo";
+import AdminProfile from "../admin/AdminProfile";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -44,6 +59,21 @@ const StackNavigator = () => {
           }}
         />
 
+        <Tab.Screen
+          name="Collections"
+          component={CollectionScreen}
+          options={{
+            tabBarLabel: "Collections",
+            tabBarLabelStyle: { color: "#008E97" },
+            headerShown: false,
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <FontAwesome name="list-alt" size={24} color="#008E97" />
+              ) : (
+                <FontAwesome name="list-alt" size={24} color="black" />
+              ),
+          }}
+        />
         <Tab.Screen
           name="Cart"
           component={CartScreen}
@@ -97,6 +127,125 @@ const StackNavigator = () => {
     );
   }
 
+  function BottomTabsForRider() {
+    return (
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Rider"
+          component={Dashboard}
+          options={{
+            tabBarLabel: "Home",
+            tabBarLabelStyle: { color: "#008E97" },
+            headerShown: false,
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <Entypo name="home" size={24} color="#008E97" />
+              ) : (
+                <AntDesign name="home" size={24} color="black" />
+              ),
+          }}
+        />
+        <Tab.Screen
+          name="Rider Profile"
+          component={RiderProfileScreen}
+          options={{
+            tabBarLabel: "Profile",
+            tabBarLabelStyle: { color: "#008E97" },
+            headerShown: true,
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <Ionicons name="person" size={24} color="#008E97" />
+              ) : (
+                <Ionicons name="person-outline" size={24} color="black" />
+              ),
+          }}
+        />
+      </Tab.Navigator>
+    );
+  }
+
+  function BottomTabsForAdmin() {
+    return (
+      <Tab.Navigator>
+        <Tab.Screen
+          name="AdminHome"
+          component={AdminHome}
+          options={{
+            tabBarLabel: "Home",
+            tabBarLabelStyle: { color: "#008E97" },
+            headerShown: false,
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <AntDesign name="home" size={24} color="#008E97" />
+              ) : (
+                <AntDesign name="home" size={24} color="black" />
+              ),
+          }}
+        />
+        <Tab.Screen
+          name="Users"
+          component={UserList}
+          options={{
+            tabBarLabel: "Users",
+            tabBarLabelStyle: { color: "#008E97" },
+            headerShown: true,
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <Feather name="users" size={24} color="#008E97" />
+              ) : (
+                <Feather name="users" size={24} color="black" />
+              ),
+          }}
+        />
+        <Tab.Screen
+          name="Products"
+          component={ProductList}
+          options={{
+            tabBarLabel: "Products",
+            tabBarLabelStyle: { color: "#008E97" },
+            headerShown: true,
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <Entypo name="list" size={24} color="#008E97" />
+              ) : (
+                <Entypo name="list" size={24} color="black" />
+              ),
+          }}
+        />
+        <Tab.Screen
+          name="Orders"
+          component={OrderList}
+          options={{
+            tabBarLabel: "Orders",
+            tabBarLabelStyle: { color: "#008E97" },
+            headerShown: true,
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <AntDesign name="shoppingcart" size={24} color="#008E97" />
+              ) : (
+                <AntDesign name="shoppingcart" size={24} color="black" />
+              ),
+          }}
+        />
+        <Tab.Screen
+          name="Admin Profile"
+          component={AdminProfile}
+          options={{
+            tabBarLabel: "Profile",
+            tabBarLabelStyle: { color: "#008E97" },
+            headerShown: true,
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <AntDesign name="user" size={24} color="#008E97" />
+              ) : (
+                <AntDesign name="user" size={24} color="black" />
+              ),
+          }}
+        />
+      </Tab.Navigator>
+    );
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -113,6 +262,16 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Main"
           component={BottomTabs}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="RiderScreen"
+          component={BottomTabsForRider}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AdminScreen"
+          component={BottomTabsForAdmin}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -133,6 +292,41 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Confirm"
           component={ConfirmationScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Order"
+          component={OrderScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="OrderInfo"
+          component={OrderInfoScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="RecievedOrderInfo"
+          component={RecievedOrderInfo}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AddProduct"
+          component={AddProduct}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AdminProductInfo"
+          component={ProductListInfo}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="UsersInformation"
+          component={UserListInfo}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ProfileInfo"
+          component={ProfileDetails}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

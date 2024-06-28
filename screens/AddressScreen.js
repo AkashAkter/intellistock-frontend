@@ -84,7 +84,7 @@ const AddressScreen = () => {
         </Text>
         <TextInput
           placeholderTextColor={"black"}
-          placeholder="India"
+          placeholder="Malaysia"
           style={{
             padding: 10,
             borderColor: "#D0D0D0",
@@ -116,7 +116,7 @@ const AddressScreen = () => {
 
         <View>
           <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-            Mobile numebr
+            Mobile number
           </Text>
 
           <TextInput

@@ -17,6 +17,7 @@ import Entypo from "@expo/vector-icons/Entypo";
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const navigation = useNavigation();
@@ -24,7 +25,9 @@ const RegisterScreen = () => {
     const user = {
       name: name,
       email: email,
+      phoneNumber: phoneNumber,
       password: password,
+      role: "customer",
     };
     try {
       const response = await fetch("http://192.168.0.113:8000/register", {
@@ -52,6 +55,7 @@ const RegisterScreen = () => {
         setEmail("");
         setPassword("");
         setName("");
+        setPhoneNumber("");
       }
     } catch (error) {
       Alert.alert("Registration Error", "An error occurred while registering");
@@ -59,8 +63,10 @@ const RegisterScreen = () => {
       setEmail("");
       setPassword("");
       setName("");
+      setPhoneNumber("");
     }
   };
+
   return (
     <SafeAreaView
       style={{
@@ -151,6 +157,39 @@ const RegisterScreen = () => {
                 fontSize: email ? 16 : 16,
               }}
               placeholder="enter your Email"
+            />
+          </View>
+        </View>
+
+        <View style={{ marginTop: 10 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 5,
+              backgroundColor: "#D0D0D0",
+              paddingVertical: 5,
+              borderRadius: 5,
+              marginTop: 10,
+            }}
+          >
+            <MaterialIcons
+              style={{ marginLeft: 8 }}
+              name="email"
+              size={24}
+              color="gray"
+            />
+
+            <TextInput
+              value={phoneNumber}
+              onChangeText={(text) => setPhoneNumber(text)}
+              style={{
+                color: "gray",
+                marginVertical: 10,
+                width: 300,
+                fontSize: phoneNumber ? 16 : 16,
+              }}
+              placeholder="enter your phone number"
             />
           </View>
         </View>
