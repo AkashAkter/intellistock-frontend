@@ -10,10 +10,7 @@ const ProductItem = ({ item }) => {
   const [addedToCart, setAddedToCart] = useState(false);
   const dispatch = useDispatch();
 
-  // console.log(item.title);
-
   const addItemToCart = (item) => {
-    // console.log("Adding to cart:", item.title);
     setAddedToCart(true);
     dispatch(addToCart(item));
     setTimeout(() => {
@@ -29,18 +26,15 @@ const ProductItem = ({ item }) => {
           `http://192.168.0.113:8000/profile/${userId}`
         );
         const { user } = response.data;
-
         setUser(user);
       } catch (error) {
         console.log("error", error);
       }
     };
     fetchUserProfile();
-  }, []);
+  }, [userId]);
 
-  // console.log(user._id);
   const addedToFavourite = async (item) => {
-    // console.log(item.title);
     try {
       const response = await fetch("http://192.168.0.113:8000/favourite", {
         method: "POST",
@@ -63,11 +57,8 @@ const ProductItem = ({ item }) => {
       }
 
       const data = await response.json();
-      // console.log("Added successfully:", data.favourite);
-      // Optionally handle the response here if needed
     } catch (error) {
       console.error("Error adding to favourites:", error.message);
-      // Handle error state in your UI or display a message to the user
     }
   };
 
@@ -77,8 +68,14 @@ const ProductItem = ({ item }) => {
         style={{ width: 150, height: 150, resizeMode: "contain" }}
         source={{ uri: item?.image }}
       />
-      <Text numberOfLines={1} style={{ width: 150, marginTop: 10 }}>
+      <Text
+        numberOfLines={1}
+        style={{ width: 150, marginTop: 10, fontWeight: 700 }}
+      >
         {item?.title}
+      </Text>
+      <Text numberOfLines={2} style={{ width: 150, marginTop: 5 }}>
+        {item?.description}
       </Text>
       <View
         style={{
@@ -88,34 +85,33 @@ const ProductItem = ({ item }) => {
           justifyContent: "space-between",
         }}
       >
-        <Text style={{ fontSize: 15, fontWeight: "bold" }}>
+        <Text style={{ fontSize: 15, fontWeight: "bold", color: "#008e97" }}>
           RM {item?.price}
         </Text>
       </View>
       <Pressable
         onPress={() => addItemToCart(item)}
         style={{
-          backgroundColor: "#FFC72C",
+          backgroundColor: "#008E97",
           padding: 10,
           borderRadius: 20,
           justifyContent: "center",
           alignItems: "center",
-
           marginTop: 10,
         }}
       >
         {addedToCart ? (
           <View>
-            <Text>Added to Cart</Text>
+            <Text style={{ color: "white" }}>Added to Cart</Text>
           </View>
         ) : (
-          <Text>Add to Cart</Text>
+          <Text style={{ color: "white" }}>Add to Cart</Text>
         )}
       </Pressable>
       <Pressable
         onPress={() => addedToFavourite(item)}
         style={{
-          backgroundColor: "#eddfb9",
+          backgroundColor: "#c0edf0",
           padding: 10,
           borderRadius: 20,
           justifyContent: "center",

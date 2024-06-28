@@ -64,7 +64,7 @@ const CartScreen = () => {
       <Pressable
         onPress={handleProceedToBuy}
         style={{
-          backgroundColor: "#FFC72C",
+          backgroundColor: "#008E97",
           padding: 10,
           borderRadius: 5,
           justifyContent: "center",
@@ -73,7 +73,9 @@ const CartScreen = () => {
           marginTop: 10,
         }}
       >
-        <Text>Proceed to Buy ({cart.length}) items</Text>
+        <Text style={{ color: "white" }}>
+          Proceed to Buy ({cart.length}) items
+        </Text>
       </Pressable>
 
       <Text

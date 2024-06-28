@@ -283,13 +283,19 @@ const HomeScreen = () => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <Text style={{ fontSize: 15, fontWeight: "bold" }}>
+                    <Text
+                      style={{
+                        fontSize: 15,
+                        fontWeight: "bold",
+                        color: "#008e97",
+                      }}
+                    >
                       RM {product?.price}
                     </Text>
                   </View>
                   <Pressable
                     style={{
-                      backgroundColor: "#FFC72C",
+                      backgroundColor: "#008E97",
                       padding: 10,
                       borderRadius: 20,
                       justifyContent: "center",
@@ -298,7 +304,7 @@ const HomeScreen = () => {
                       marginTop: 10,
                     }}
                   >
-                    <Text>Add to Cart</Text>
+                    <Text style={{ color: "white" }}>Add to Cart</Text>
                   </Pressable>
                 </Pressable>
               ))}
@@ -367,13 +373,19 @@ const HomeScreen = () => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <Text style={{ fontSize: 15, fontWeight: "bold" }}>
+                    <Text
+                      style={{
+                        fontSize: 15,
+                        fontWeight: "bold",
+                        color: "#008e97",
+                      }}
+                    >
                       RM {product.price}
                     </Text>
                   </View>
                   <Pressable
                     style={{
-                      backgroundColor: "#FFC72C",
+                      backgroundColor: "#008E97",
                       paddingVertical: 10,
                       paddingHorizontal: 20,
                       borderRadius: 20,
@@ -382,7 +394,7 @@ const HomeScreen = () => {
                       marginTop: 10,
                     }}
                   >
-                    <Text>Add to Cart</Text>
+                    <Text style={{ color: "white" }}>Add to Cart</Text>
                   </Pressable>
                   <Text
                     style={{

@@ -228,28 +228,13 @@ const RegisterScreen = () => {
           </View>
         </View>
 
-        <View
-          style={{
-            marginTop: 12,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <Text>Keep me logged in</Text>
-
-          <Text style={{ color: "#007FFF", fontWeight: "500" }}>
-            Forgot Password
-          </Text>
-        </View>
-
         <View style={{ marginTop: 80 }} />
 
         <Pressable
           onPress={handleRegister}
           style={{
             width: 200,
-            backgroundColor: "#50604F",
+            backgroundColor: "#008e97",
             borderRadius: 6,
             marginLeft: "auto",
             marginRight: "auto",
@@ -272,7 +257,7 @@ const RegisterScreen = () => {
           onPress={() => navigation.navigate("Login")}
           style={{ marginTop: 15 }}
         >
-          <Text style={{ textAlign: "center", color: "gray", fontSize: 16 }}>
+          <Text style={{ textAlign: "center", color: "#008e97", fontSize: 16 }}>
             Already have an account? Sign In
           </Text>
         </Pressable>

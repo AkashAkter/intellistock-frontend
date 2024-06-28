@@ -206,7 +206,7 @@ const ProductInfoScreen = () => {
       <Pressable
         onPress={() => addItemToCart(route?.params?.item)}
         style={{
-          backgroundColor: "#FFC72C",
+          backgroundColor: "#008E97",
           padding: 10,
           borderRadius: 20,
           justifyContent: "center",

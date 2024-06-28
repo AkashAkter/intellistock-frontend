@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  FlatList,
   Image,
   Pressable,
   ScrollView,
@@ -33,18 +32,15 @@ const FavouriteScreen = () => {
     };
 
     fetchUserProfile();
-  }, []);
-  // console.log(user);
+  }, [userId]);
 
   const [products, setProducts] = useState([]);
 
-  // console.log(cart);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("http://192.168.0.113:8000/favourite");
         const json = await response.json();
-        // console.log("Fetched products:", json.products); // Debug log
         setProducts(json.favourite);
       } catch (error) {
         console.log("Error message:", error);
@@ -54,7 +50,9 @@ const FavouriteScreen = () => {
     fetchData();
   }, []);
 
-  // console.log(products);
+  const filteredProducts = products.filter(
+    (product) => product.userId === user?._id
+  );
 
   return (
     <SafeAreaView style={{ flex: 1, padding: 10, backgroundColor: "#fff" }}>
@@ -74,7 +72,7 @@ const FavouriteScreen = () => {
             justifyContent: "space-around",
           }}
         >
-          {products?.map((product, index) => (
+          {filteredProducts.map((product, index) => (
             <Pressable key={index} style={{ margin: 10 }}>
               <Image
                 style={{ width: 150, height: 150, resizeMode: "contain" }}
@@ -91,7 +89,9 @@ const FavouriteScreen = () => {
                   justifyContent: "space-between",
                 }}
               >
-                <Text style={{ fontSize: 15, fontWeight: "bold" }}>
+                <Text
+                  style={{ fontSize: 15, fontWeight: "bold", color: "#008e97" }}
+                >
                   RM {product?.price}
                 </Text>
               </View>

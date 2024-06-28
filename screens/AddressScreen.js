@@ -211,7 +211,7 @@ const AddressScreen = () => {
         <Pressable
           onPress={handleAddAddress}
           style={{
-            backgroundColor: "#FFC72C",
+            backgroundColor: "#008E97",
             padding: 19,
             borderRadius: 6,
             justifyContent: "center",
