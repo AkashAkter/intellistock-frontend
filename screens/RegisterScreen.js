@@ -10,7 +10,7 @@ import {
   Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -157,6 +157,8 @@ const RegisterScreen = () => {
                 fontSize: email ? 16 : 16,
               }}
               placeholder="enter your Email"
+              keyboardType="email-address"
+              autoCapitalize="none"
             />
           </View>
         </View>
@@ -175,7 +177,7 @@ const RegisterScreen = () => {
           >
             <MaterialIcons
               style={{ marginLeft: 8 }}
-              name="email"
+              name="phone"
               size={24}
               color="gray"
             />
@@ -190,6 +192,7 @@ const RegisterScreen = () => {
                 fontSize: phoneNumber ? 16 : 16,
               }}
               placeholder="enter your phone number"
+              keyboardType="phone-pad"
             />
           </View>
         </View>
@@ -206,8 +209,8 @@ const RegisterScreen = () => {
               marginTop: 10,
             }}
           >
-            <AntDesign
-              name="lock1"
+            <FontAwesome
+              name="lock"
               size={24}
               color="gray"
               style={{ marginLeft: 8 }}
@@ -224,6 +227,7 @@ const RegisterScreen = () => {
                 fontSize: password ? 16 : 16,
               }}
               placeholder="enter your Password"
+              autoCapitalize="none"
             />
           </View>
         </View>

@@ -2,7 +2,6 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   Image,
-  Platform,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -36,6 +35,7 @@ const AddProduct = () => {
           description,
           category,
           image,
+          trendingProduct: "no",
           // Ensure discountPrice is sent as a number
         }),
       });

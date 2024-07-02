@@ -81,7 +81,7 @@ const HomeScreen = () => {
       image: "https://i.ibb.co/jv1Rt44/10.jpg",
     },
   ];
-  const offers = [
+  const offerss = [
     {
       id: 15,
       title: "Crayon Set",
@@ -141,6 +141,7 @@ const HomeScreen = () => {
   const { userId, setUserId } = useContext(UserType);
   const navigation = useNavigation();
   const [products, setProducts] = useState([]);
+  const [offers, setOffers] = useState([]);
   const [addresses, setAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState("");
 
@@ -152,6 +153,21 @@ const HomeScreen = () => {
         const json = await response.json();
         // console.log("Fetched products:", json.products); // Debug log
         setProducts(json.products);
+      } catch (error) {
+        console.log("Error message:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://192.168.0.113:8000/offers");
+        const json = await response.json();
+        // console.log("Fetched products:", json.products); // Debug log
+        setOffers(json.offers);
       } catch (error) {
         console.log("Error message:", error);
       }
@@ -260,54 +276,19 @@ const HomeScreen = () => {
 
             <View
               style={{
-                marginTop: 15,
                 flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
                 flexWrap: "wrap",
-                justifyContent: "space-around",
               }}
             >
-              {trendingProducts?.map((product, index) => (
-                <Pressable style={{ margin: 10 }} key={index}>
-                  <Image
-                    style={{ width: 150, height: 150, resizeMode: "contain" }}
-                    source={{ uri: product?.image }}
-                  />
-                  <Text numberOfLines={1} style={{ width: 150, marginTop: 10 }}>
-                    {product?.title}
-                  </Text>
-                  <View
-                    style={{
-                      marginTop: 5,
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontSize: 15,
-                        fontWeight: "bold",
-                        color: "#008e97",
-                      }}
-                    >
-                      RM {product?.price}
-                    </Text>
+              {products
+                ?.filter((product) => product.trendingProduct === "yes")
+                .map((item, index) => (
+                  <View key={index} style={{ margin: 20 }}>
+                    <ProductItem item={item} />
                   </View>
-                  <Pressable
-                    style={{
-                      backgroundColor: "#008E97",
-                      padding: 10,
-                      borderRadius: 20,
-                      justifyContent: "center",
-                      alignItems: "center",
-
-                      marginTop: 10,
-                    }}
-                  >
-                    <Text style={{ color: "white" }}>Add to Cart</Text>
-                  </Pressable>
-                </Pressable>
-              ))}
+                ))}
             </View>
           </View>
 
@@ -354,59 +335,10 @@ const HomeScreen = () => {
                 justifyContent: "space-around",
               }}
             >
-              {offers?.map((product, index) => (
-                <Pressable key={index} style={{ margin: 10, width: 180 }}>
-                  <Image
-                    style={{ width: 150, height: 150, resizeMode: "contain" }}
-                    source={{ uri: product.image }}
-                  />
-                  <Text
-                    numberOfLines={1}
-                    style={{ marginTop: 10, fontSize: 16 }}
-                  >
-                    {product.title}
-                  </Text>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontSize: 15,
-                        fontWeight: "bold",
-                        color: "#008e97",
-                      }}
-                    >
-                      RM {product.price}
-                    </Text>
-                  </View>
-                  <Pressable
-                    style={{
-                      backgroundColor: "#008E97",
-                      paddingVertical: 10,
-                      paddingHorizontal: 20,
-                      borderRadius: 20,
-                      justifyContent: "center",
-                      alignItems: "center",
-                      marginTop: 10,
-                    }}
-                  >
-                    <Text style={{ color: "white" }}>Add to Cart</Text>
-                  </Pressable>
-                  <Text
-                    style={{
-                      marginTop: 5,
-                      fontSize: 12,
-                      fontWeight: 900,
-                      color: "red",
-                    }}
-                  >
-                    {product.offer}
-                  </Text>
-                </Pressable>
+              {offers?.map((item, index) => (
+                <View key={index} style={{ margin: 20 }}>
+                  <ProductItem item={item} />
+                </View>
               ))}
             </View>
           </View>

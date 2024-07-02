@@ -8,6 +8,7 @@ import axios from "axios";
 const ProductItem = ({ item }) => {
   const [user, setUser] = useState();
   const [addedToCart, setAddedToCart] = useState(false);
+  const [favouriteDisabled, setFavouriteDisabled] = useState(false);
   const dispatch = useDispatch();
 
   const addItemToCart = (item) => {
@@ -58,7 +59,7 @@ const ProductItem = ({ item }) => {
 
       const data = await response.json();
     } catch (error) {
-      console.error("Error adding to favourites:", error.message);
+      // console.error("Error adding to favourites:", error.message);
     }
   };
 
@@ -109,7 +110,11 @@ const ProductItem = ({ item }) => {
         )}
       </Pressable>
       <Pressable
-        onPress={() => addedToFavourite(item)}
+        onPress={() => {
+          addedToFavourite(item);
+          setFavouriteDisabled(true);
+        }}
+        disabled={favouriteDisabled}
         style={{
           backgroundColor: "#c0edf0",
           padding: 10,
@@ -118,6 +123,7 @@ const ProductItem = ({ item }) => {
           alignItems: "center",
           marginHorizontal: 10,
           marginTop: 10,
+          opacity: favouriteDisabled ? 0.5 : 1,
         }}
       >
         <Text>Mark As Favourite</Text>

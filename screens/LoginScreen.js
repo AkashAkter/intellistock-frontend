@@ -152,6 +152,8 @@ const LoginScreen = () => {
                 fontSize: email ? 16 : 16,
               }}
               placeholder="enter your Email"
+              keyboardType="email-address"
+              autoCapitalize="none"
             />
           </View>
         </View>
@@ -186,6 +188,7 @@ const LoginScreen = () => {
                 fontSize: password ? 16 : 16,
               }}
               placeholder="enter your Password"
+              autoCapitalize="none"
             />
           </View>
         </View>

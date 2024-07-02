@@ -50,7 +50,7 @@ const FavouriteScreen = () => {
     fetchData();
   }, []);
 
-  const filteredProducts = products.filter(
+  const filteredProducts = products?.filter(
     (product) => product.userId === user?._id
   );
 
@@ -72,7 +72,7 @@ const FavouriteScreen = () => {
             justifyContent: "space-around",
           }}
         >
-          {filteredProducts.map((product, index) => (
+          {filteredProducts?.map((product, index) => (
             <Pressable key={index} style={{ margin: 10 }}>
               <Image
                 style={{ width: 150, height: 150, resizeMode: "contain" }}

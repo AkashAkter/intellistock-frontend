@@ -1,0 +1,52 @@
+[
+  {
+    "id": 6,
+    "title": "3-Ring Binder",
+    "oldPrice": "14.00",
+    "description": "Durable 1-inch binder with pockets.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/xMNW08F/6.jpg",
+    "discount": "50% discount on this product",
+    "price": "7.00"
+  },
+  {
+    "id": 7,
+    "title": "Highlighter Set",
+    "oldPrice": "6.00",
+    "description": "Set of 4 neon highlighters for marking text.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/znXMMyV/7.jpg",
+    "discount": "25% discount applied",
+    "price": "4.50"
+  },
+  {
+    "id": 8,
+    "title": "12-inch Ruler",
+    "oldPrice": "4.00",
+    "description": "Clear plastic ruler with both metric and imperial measurements.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/tpjN1ZG/8.jpg",
+    "discount": "20% off for a limited time",
+    "price": "3.20"
+  },
+  {
+    "id": 24,
+    "title": "Paper Clips",
+    "oldPrice": "4.00",
+    "description": "Pack of 100 paper clips.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/NNbMRgj/24.jpg",
+    "discount": "Save 50% today",
+    "price": "2.00"
+  },
+  {
+    "id": 25,
+    "title": "Stapler",
+    "oldPrice": "20.00",
+    "description": "Compact stapler with 500 staples.",
+    "category": "Stationery",
+    "image": "https://i.ibb.co/3NPHcX9/25.jpg",
+    "discount": "Limited time offer: 50% off",
+    "price": "10.00"
+  }
+]
