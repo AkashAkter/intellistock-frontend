@@ -12,7 +12,8 @@ import {
   Alert,
 } from "react-native";
 
-const AddProduct = () => {
+const AddProduct = ({ route }) => {
+  // Destructure route to access navigation params
   // State variables for form inputs
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
@@ -20,6 +21,7 @@ const AddProduct = () => {
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   const navigation = useNavigation();
+  const { setRefreshProducts } = route.params || {}; // Destructure setRefreshProducts from route.params
 
   // Function to handle form submission
   const handleSubmit = async () => {
@@ -53,6 +55,9 @@ const AddProduct = () => {
       setImage("");
 
       Alert.alert("Success", "Product added successfully.");
+      if (setRefreshProducts) {
+        setRefreshProducts(true); // Trigger refresh of ProductList component
+      }
       navigation.navigate("Products");
     } catch (error) {
       console.error("Error adding product:", error);

@@ -6,6 +6,7 @@ import ProductListInfo from "./ProductListInfo";
 const ProductList = () => {
   const navigation = useNavigation();
   const [products, setProducts] = useState([]);
+  const [refreshProducts, setRefreshProducts] = useState(false);
 
   // Function to fetch products from the server
   const fetchProducts = async () => {
@@ -21,6 +22,10 @@ const ProductList = () => {
     }
   };
 
+  useEffect(() => {
+    fetchProducts();
+  }, [refreshProducts]);
+
   // Fetch products on component mount
   useEffect(() => {
     fetchProducts();
@@ -35,7 +40,9 @@ const ProductList = () => {
     <ScrollView style={{ flex: 1 }}>
       <View>
         <Pressable
-          onPress={() => navigation.navigate("AddProduct")}
+          onPress={() =>
+            navigation.navigate("AddProduct", { setRefreshProducts })
+          }
           style={{
             padding: 10,
             backgroundColor: "#12b571",

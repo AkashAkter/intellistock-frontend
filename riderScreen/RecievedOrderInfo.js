@@ -1,10 +1,38 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
+import { Text, View, Image, TouchableOpacity, Alert } from "react-native";
 
-const RecievedOrderInfo = ({ order }) => {
-  const productDelivered = () => {
-    console.log("DELIVERED");
+const RecievedOrderInfo = ({ order, user, refreshOrders }) => {
+  const productDelivered = async () => {
+    try {
+      const response = await fetch(
+        `http://192.168.0.113:8000/orders/${order._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            status: "delivered",
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      Alert.alert("Success", "Order status updated successfully.", [
+        {
+          text: "OK",
+          onPress: () => {
+            refreshOrders(); // Call refreshOrders after successful update
+          },
+        },
+      ]);
+    } catch (error) {
+      console.error("Error updating order:", error);
+    }
   };
+
   return (
     <View
       style={{
@@ -51,10 +79,10 @@ const RecievedOrderInfo = ({ order }) => {
             marginTop: 10,
             borderRadius: 5,
           }}
-          onPress={productDelivered} // Call function to update order status
+          onPress={productDelivered}
         >
           <Text style={{ color: "white", fontWeight: "bold" }}>
-            Mark as Received
+            Mark as Delivered
           </Text>
         </TouchableOpacity>
       </View>
@@ -63,5 +91,3 @@ const RecievedOrderInfo = ({ order }) => {
 };
 
 export default RecievedOrderInfo;
-
-const styles = StyleSheet.create({});

@@ -10,6 +10,7 @@ import RecievedOrderInfo from "./RecievedOrderInfo";
 
 const RiderProfileScreen = () => {
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { userId, setUserId } = useContext(UserType);
   const navigation = useNavigation();
   const logout = () => {
@@ -65,6 +66,25 @@ const RiderProfileScreen = () => {
     fetchData();
   }, []);
 
+  const refreshOrders = async () => {
+    setLoading(true); // Set loading state to true while fetching data
+
+    try {
+      const response = await fetch("http://192.168.0.113:8000/orders");
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const json = await response.json();
+      setOrders(json.orders);
+    } catch (error) {
+      console.log("Error fetching orders:", error);
+    } finally {
+      setLoading(false); // Set loading state to false after fetching data
+    }
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <ScrollView>
@@ -102,13 +122,22 @@ const RiderProfileScreen = () => {
           >
             <View style={{}}>
               {orders
-                ?.filter((order) => order.riderName === user.name)
+                ?.filter(
+                  (order) =>
+                    order.riderName === user.name && order.status === "received"
+                )
                 .map((order, index) => (
-                  <RecievedOrderInfo key={index} order={order} />
+                  <RecievedOrderInfo
+                    key={index}
+                    order={order}
+                    user={user}
+                    refreshOrders={refreshOrders}
+                  />
                 ))}
             </View>
           </View>
         </View>
+
         <View
           style={{
             flexDirection: "row",

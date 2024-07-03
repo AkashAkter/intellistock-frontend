@@ -27,13 +27,6 @@ const OrderInfoScreen = ({ order, user, refreshOrders }) => {
         {
           text: "OK",
           onPress: () => {
-            // Navigate to another route or perform other actions
-            // Example: navigate to a different screen using navigation.navigate
-            // Make sure to import useNavigation from @react-navigation/native
-            // const navigation = useNavigation();
-            // navigation.navigate('AnotherRoute');
-
-            // Example: refresh orders after successful delivery
             refreshOrders();
           },
         },
