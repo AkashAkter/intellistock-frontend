@@ -50,6 +50,20 @@ const FavouriteScreen = () => {
     fetchData();
   }, []);
 
+  const handleRemoveFromFavourites = async (productId) => {
+    try {
+      const response = await axios.delete(
+        `http://192.168.0.113:8000/favourites/${productId}`
+      );
+      if (response.status === 200) {
+        // Remove the product from the local state
+        setProducts(products.filter((product) => product._id !== productId));
+      }
+    } catch (error) {
+      console.error("Error removing from favourites:", error);
+    }
+  };
+
   const filteredProducts = products?.filter(
     (product) => product.userId === user?._id
   );
@@ -73,7 +87,7 @@ const FavouriteScreen = () => {
           }}
         >
           {filteredProducts?.map((product, index) => (
-            <Pressable key={index} style={{ margin: 10 }}>
+            <View key={index} style={{ margin: 10 }}>
               <Image
                 style={{ width: 150, height: 150, resizeMode: "contain" }}
                 source={{ uri: product?.image }}
@@ -95,7 +109,13 @@ const FavouriteScreen = () => {
                   RM {product?.price}
                 </Text>
               </View>
-            </Pressable>
+              <Pressable
+                style={{ backgroundColor: "#ff6347", padding: 5 }}
+                onPress={() => handleRemoveFromFavourites(product._id)}
+              >
+                <Text style={{ color: "white" }}>Remove From Favourite</Text>
+              </Pressable>
+            </View>
           ))}
         </View>
       </ScrollView>

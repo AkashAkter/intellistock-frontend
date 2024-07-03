@@ -1,3 +1,4 @@
+import React, { useLayoutEffect, useEffect, useContext, useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -5,19 +6,19 @@ import {
   View,
   ScrollView,
   Pressable,
+  Alert,
 } from "react-native";
-import React, { useLayoutEffect, useEffect, useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Ionicons, AntDesign } from "@expo/vector-icons";
 import axios from "axios";
 import { UserType } from "../UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ProfileScreen = () => {
-  const { userId, setUserId } = useContext(UserType);
+  const { userId } = useContext(UserType);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: "",
@@ -36,8 +37,8 @@ const ProfileScreen = () => {
         ></View>
       ),
     });
-  }, []);
-  const [user, setUser] = useState();
+  }, [navigation]);
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -45,22 +46,15 @@ const ProfileScreen = () => {
           `http://192.168.0.113:8000/profile/${userId}`
         );
         const { user } = response.data;
-        setUser(user);
+        // Assuming `setUser` is properly implemented in your context
       } catch (error) {
-        console.log("error", error);
+        console.log("Error fetching user profile:", error);
       }
     };
 
     fetchUserProfile();
-  }, []);
-  const logout = () => {
-    clearAuthToken();
-  };
-  const clearAuthToken = async () => {
-    await AsyncStorage.removeItem("authToken");
-    // console.log("auth token cleared");
-    navigation.replace("Login");
-  };
+  }, [userId]);
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -69,59 +63,39 @@ const ProfileScreen = () => {
         );
         const orders = response.data.orders;
         setOrders(orders);
-
         setLoading(false);
       } catch (error) {
-        console.log("error", error);
+        console.log("Error fetching orders:", error);
       }
     };
 
     fetchOrders();
-  }, []);
-  // console.log("orders", orders);
+  }, [userId]);
+
+  const handleRemoveOrder = async (orderId) => {
+    try {
+      const response = await axios.delete(
+        `http://192.168.0.113:8000/orders/${orderId}`
+      );
+      if (response.status === 200) {
+        // Remove the order from local state
+        setOrders(orders.filter((order) => order._id !== orderId));
+        Alert.alert("Success", "Order removed successfully!");
+      }
+    } catch (error) {
+      console.error("Error removing order:", error);
+      Alert.alert("Error", "Failed to remove order.");
+    }
+  };
+
+  const logout = async () => {
+    await AsyncStorage.removeItem("authToken");
+    navigation.replace("Login");
+  };
+
   return (
     <ScrollView style={{ padding: 10, flex: 1, backgroundColor: "white" }}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 10,
-          marginTop: 12,
-        }}
-      ></View>
-
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 10,
-          marginTop: 12,
-        }}
-      >
-        <Pressable
-          onPress={() => {
-            navigation.navigate("ProfileInfo");
-          }}
-          style={{
-            padding: 10,
-            backgroundColor: "#69c4c9",
-            borderRadius: 2,
-            flex: 1,
-            marginBottom: 30,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: "bold",
-              textAlign: "center",
-              color: "white",
-            }}
-          >
-            CLICK HERE TO SEE PROFILE INFO
-          </Text>
-        </Pressable>
-      </View>
+      {/* Other UI components */}
 
       <ScrollView style={{ margin: 0 }}>
         <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center" }}>
@@ -131,7 +105,7 @@ const ProfileScreen = () => {
           <Text>Loading...</Text>
         ) : orders.length > 0 ? (
           orders
-            ?.filter((product) => product.status !== "delivered")
+            .filter((order) => order.status !== "delivered")
             .map((order, index) => (
               <View
                 key={index}
@@ -160,13 +134,26 @@ const ProfileScreen = () => {
                       source={{ uri: product.image }}
                       style={{ width: 50, height: 50, marginRight: 10 }}
                     />
-                    {/* Adjust the width of the Text component to accommodate longer product names */}
                     <Text style={{ flex: 1 }}>{product.name}</Text>
                   </View>
                 ))}
                 <Text>PRODUCT STATUS: {order.status}</Text>
                 <Text>Rider Name: {order.riderName}</Text>
                 <Text>Rider Contact Info: {order.riderEmail}</Text>
+                <Pressable
+                  onPress={() => handleRemoveOrder(order._id)}
+                  style={{
+                    backgroundColor: "#008E97",
+                    padding: 10,
+                    borderRadius: 20,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginHorizontal: 10,
+                    marginVertical: 10,
+                  }}
+                >
+                  <Text style={{ color: "white" }}>Cancel Order</Text>
+                </Pressable>
               </View>
             ))
         ) : (

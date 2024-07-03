@@ -338,6 +338,15 @@ const HomeScreen = () => {
               {offers?.map((item, index) => (
                 <View key={index} style={{ margin: 20 }}>
                   <ProductItem item={item} />
+                  <Text
+                    style={{
+                      color: "red",
+                      textAlign: "center",
+                      fontWeight: "900",
+                    }}
+                  >
+                    {item.discount}
+                  </Text>
                 </View>
               ))}
             </View>
