@@ -51,16 +51,13 @@ const LoginScreen = () => {
       password: password,
     };
     // console.log(user);
-    fetch(
-      "https://intelli-stock-server-akash-akters-projects.vercel.app/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      }
-    )
+    fetch("http://192.168.0.113:8000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Invalid Email or Password");

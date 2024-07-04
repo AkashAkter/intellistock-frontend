@@ -5,7 +5,7 @@ const UserListInfo = ({ user, onDelete }) => {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `https://intelli-stock-server-akash-akters-projects.vercel.app/users/${user._id}`,
+        `http://192.168.0.113:8000/users/${user._id}`,
         {
           method: "DELETE",
         }

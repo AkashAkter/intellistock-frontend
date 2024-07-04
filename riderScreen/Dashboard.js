@@ -38,7 +38,7 @@ const Dashboard = () => {
     const fetchUserProfile = async () => {
       try {
         const response = await fetch(
-          `https://intelli-stock-server-akash-akters-projects.vercel.app/profile/${userId}`
+          `http://192.168.0.113:8000/profile/${userId}`
         );
 
         if (!response.ok) {
@@ -61,9 +61,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "https://intelli-stock-server-akash-akters-projects.vercel.app/orders"
-        );
+        const response = await fetch("http://192.168.0.113:8000/orders");
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -83,9 +81,7 @@ const Dashboard = () => {
     setLoading(true); // Set loading state to true while fetching data
 
     try {
-      const response = await fetch(
-        "https://intelli-stock-server-akash-akters-projects.vercel.app/orders"
-      );
+      const response = await fetch("http://192.168.0.113:8000/orders");
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);

@@ -11,9 +11,7 @@ const ProductList = () => {
   // Function to fetch products from the server
   const fetchProducts = async () => {
     try {
-      const response = await fetch(
-        "https://intelli-stock-server-akash-akters-projects.vercel.app/products"
-      );
+      const response = await fetch("http://192.168.0.113:8000/products");
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -57,6 +55,25 @@ const ProductList = () => {
             style={{ textAlign: "center", color: "white", fontWeight: 700 }}
           >
             CLICK HERE TO ADD PRODUCT
+          </Text>
+        </Pressable>
+
+        <Pressable
+          onPress={() =>
+            navigation.navigate("AddProductWithOffer", { setRefreshProducts })
+          }
+          style={{
+            padding: 10,
+            backgroundColor: "#12b571",
+            borderRadius: 5,
+            marginTop: 10,
+            marginHorizontal: 20,
+          }}
+        >
+          <Text
+            style={{ textAlign: "center", color: "white", fontWeight: 700 }}
+          >
+            CLICK HERE TO ADD PRODUCT WITH OFFERS
           </Text>
         </Pressable>
 

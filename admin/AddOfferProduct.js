@@ -12,32 +12,37 @@ import {
   Alert,
 } from "react-native";
 
-const AddProduct = ({ route }) => {
+const AddOfferProduct = ({ route }) => {
   // Destructure route to access navigation params
   // State variables for form inputs
+  const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
+  const [oldPrice, setOldPrice] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
+  const [discount, setDiscount] = useState("");
   const [description, setDescription] = useState("");
   const navigation = useNavigation();
-  const { setRefreshProducts } = route.params || {}; // Destructure setRefreshProducts from route.params
+  const { setRefreshProducts } = route.params || {};
 
   // Function to handle form submission
   const handleSubmit = async () => {
     try {
-      const response = await fetch("http://192.168.0.113:8000/products", {
+      const response = await fetch("http://192.168.0.113:8000/offers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          id: parseFloat(id),
           title,
-          price: parseFloat(price), // Ensure price is sent as a number
+          price: parseFloat(price),
           description,
           category,
           image,
-          trendingProduct: "no",
+          oldPrice,
+          discount,
           // Ensure discountPrice is sent as a number
         }),
       });
@@ -48,11 +53,14 @@ const AddProduct = ({ route }) => {
       }
 
       // Clear form fields after successful submission
+      setId("");
       setTitle("");
       setPrice("");
       setDescription("");
       setCategory("");
       setImage("");
+      setOldPrice("");
+      setDiscount("");
 
       Alert.alert("Success", "Product added successfully.");
       if (setRefreshProducts) {
@@ -79,6 +87,13 @@ const AddProduct = ({ route }) => {
         <View style={styles.formContainer}>
           <TextInput
             style={styles.input}
+            placeholder="Product ID"
+            value={id}
+            onChangeText={setId}
+            keyboardType="numeric"
+          />
+          <TextInput
+            style={styles.input}
             placeholder="Title"
             value={title}
             onChangeText={setTitle}
@@ -88,6 +103,13 @@ const AddProduct = ({ route }) => {
             placeholder="Price"
             value={price}
             onChangeText={setPrice}
+            keyboardType="numeric"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Old Price"
+            value={oldPrice}
+            onChangeText={setOldPrice}
             keyboardType="numeric"
           />
           <TextInput
@@ -102,6 +124,12 @@ const AddProduct = ({ route }) => {
             placeholder="Category"
             value={category}
             onChangeText={setCategory}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Discount"
+            value={discount}
+            onChangeText={setDiscount}
           />
           <TextInput
             style={styles.input}
@@ -151,4 +179,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddProduct;
+export default AddOfferProduct;

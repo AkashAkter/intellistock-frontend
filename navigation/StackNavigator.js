@@ -35,6 +35,7 @@ import ProfileDetails from "../components/ProfileDetails";
 import RecievedOrderInfo from "../riderScreen/RecievedOrderInfo";
 import UserListInfo from "../admin/UserListInfo";
 import AdminProfile from "../admin/AdminProfile";
+import AddOfferProduct from "../admin/AddOfferProduct";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -313,6 +314,11 @@ const StackNavigator = () => {
         <Stack.Screen
           name="AddProduct"
           component={AddProduct}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AddProductWithOffer"
+          component={AddOfferProduct}
           options={{ headerShown: false }}
         />
         <Stack.Screen

@@ -22,7 +22,7 @@ const FavouriteScreen = () => {
     const fetchUserProfile = async () => {
       try {
         const response = await axios.get(
-          `https://intelli-stock-server-akash-akters-projects.vercel.app/profile/${userId}`
+          `http://192.168.0.113:8000/profile/${userId}`
         );
         const { user } = response.data;
         setUser(user);
@@ -39,9 +39,7 @@ const FavouriteScreen = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "https://intelli-stock-server-akash-akters-projects.vercel.app/favourite"
-        );
+        const response = await fetch("http://192.168.0.113:8000/favourite");
         const json = await response.json();
         setProducts(json.favourite);
       } catch (error) {
@@ -55,7 +53,7 @@ const FavouriteScreen = () => {
   const handleRemoveFromFavourites = async (productId) => {
     try {
       const response = await axios.delete(
-        `https://intelli-stock-server-akash-akters-projects.vercel.app/favourites/${productId}`
+        `http://192.168.0.113:8000/favourites/${productId}`
       );
       if (response.status === 200) {
         // Remove the product from the local state

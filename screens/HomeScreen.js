@@ -149,9 +149,7 @@ const HomeScreen = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "https://intelli-stock-server-akash-akters-projects.vercel.app/products"
-        );
+        const response = await fetch("http://192.168.0.113:8000/products");
         const json = await response.json();
         // console.log("Fetched products:", json.products); // Debug log
         setProducts(json.products);
@@ -166,9 +164,7 @@ const HomeScreen = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "https://intelli-stock-server-akash-akters-projects.vercel.app/offers"
-        );
+        const response = await fetch("http://192.168.0.113:8000/offers");
         const json = await response.json();
         // console.log("Fetched products:", json.products); // Debug log
         setOffers(json.offers);
@@ -192,7 +188,7 @@ const HomeScreen = () => {
   const fetchAddresses = async () => {
     try {
       const response = await fetch(
-        `https://intelli-stock-server-akash-akters-projects.vercel.app/addresses/${userId}`
+        `http://192.168.0.113:8000/addresses/${userId}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -215,6 +211,8 @@ const HomeScreen = () => {
     fetchUser();
   }, []);
   // console.log(addresses);
+
+  const trendingQuantity = products.filter((product) => product?.quantity < 10);
 
   return (
     <>
