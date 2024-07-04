@@ -24,7 +24,7 @@ const ProductItem = ({ item }) => {
     const fetchUserProfile = async () => {
       try {
         const response = await axios.get(
-          `http://192.168.0.113:8000/profile/${userId}`
+          `https://intelli-stock-server-akash-akters-projects.vercel.app/profile/${userId}`
         );
         const { user } = response.data;
         setUser(user);
@@ -37,20 +37,23 @@ const ProductItem = ({ item }) => {
 
   const addedToFavourite = async (item) => {
     try {
-      const response = await fetch("http://192.168.0.113:8000/favourite", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: item.title,
-          price: item.price,
-          description: item.description,
-          category: item.category,
-          image: item.image,
-          userId: user._id,
-        }),
-      });
+      const response = await fetch(
+        "https://intelli-stock-server-akash-akters-projects.vercel.app/favourite",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: item.title,
+            price: item.price,
+            description: item.description,
+            category: item.category,
+            image: item.image,
+            userId: user._id,
+          }),
+        }
+      );
 
       if (!response.ok) {
         const errorMessage = await response.json();

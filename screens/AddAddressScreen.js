@@ -24,7 +24,7 @@ const AddAddressScreen = () => {
   const fetchAddresses = async () => {
     try {
       const response = await fetch(
-        `http://192.168.0.113:8000/addresses/${userId}`
+        `https://intelli-stock-server-akash-akters-projects.vercel.app/addresses/${userId}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");

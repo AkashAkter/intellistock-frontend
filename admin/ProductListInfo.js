@@ -5,7 +5,7 @@ const ProductListInfo = ({ product, onDelete }) => {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `http://192.168.0.113:8000/products/${product._id}`,
+        `https://intelli-stock-server-akash-akters-projects.vercel.app/products/${product._id}`,
         {
           method: "DELETE",
         }

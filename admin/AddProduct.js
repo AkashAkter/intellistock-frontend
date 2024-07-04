@@ -26,21 +26,24 @@ const AddProduct = ({ route }) => {
   // Function to handle form submission
   const handleSubmit = async () => {
     try {
-      const response = await fetch("http://192.168.0.113:8000/products", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title,
-          price: parseFloat(price), // Ensure price is sent as a number
-          description,
-          category,
-          image,
-          trendingProduct: "no",
-          // Ensure discountPrice is sent as a number
-        }),
-      });
+      const response = await fetch(
+        "https://intelli-stock-server-akash-akters-projects.vercel.app/products",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title,
+            price: parseFloat(price), // Ensure price is sent as a number
+            description,
+            category,
+            image,
+            trendingProduct: "no",
+            // Ensure discountPrice is sent as a number
+          }),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();

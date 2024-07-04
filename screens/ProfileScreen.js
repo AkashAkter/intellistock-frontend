@@ -43,7 +43,7 @@ const ProfileScreen = () => {
     const fetchUserProfile = async () => {
       try {
         const response = await axios.get(
-          `http://192.168.0.113:8000/profile/${userId}`
+          `https://intelli-stock-server-akash-akters-projects.vercel.app/profile/${userId}`
         );
         const { user } = response.data;
         // Assuming `setUser` is properly implemented in your context
@@ -59,7 +59,7 @@ const ProfileScreen = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `http://192.168.0.113:8000/orders/${userId}`
+          `https://intelli-stock-server-akash-akters-projects.vercel.app/orders/${userId}`
         );
         const orders = response.data.orders;
         setOrders(orders);
@@ -75,7 +75,7 @@ const ProfileScreen = () => {
   const handleRemoveOrder = async (orderId) => {
     try {
       const response = await axios.delete(
-        `http://192.168.0.113:8000/orders/${orderId}`
+        `https://intelli-stock-server-akash-akters-projects.vercel.app/orders/${orderId}`
       );
       if (response.status === 200) {
         // Remove the order from local state

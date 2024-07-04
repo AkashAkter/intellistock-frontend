@@ -22,7 +22,9 @@ const CollectionScreen = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://192.168.0.113:8000/products");
+        const response = await fetch(
+          "https://intelli-stock-server-akash-akters-projects.vercel.app/products"
+        );
         const json = await response.json();
         setProducts(json.products);
       } catch (error) {
